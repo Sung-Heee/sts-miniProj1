@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.kosa.hello.board.BoardMapper">
+<mapper namespace="org.kosa.mini.board.BoardMapper">
     <sql id="search">
         <where>
             <if test="searchKey != null and searchKey != ''">
@@ -13,8 +13,8 @@
 
     <select id="getList" resultType="BoardVO">
         select
-        b.*, m.user_id bwriter
-        from tb_board b inner join tb_member m on b.member_id = m.member_id
+        b.*, m.member_name bwriter
+        from tb_board b inner join tb_member2 m on b.member_id = m.member_id
         <include refid="search"/>
         order by bno desc limit #{skip}, #{size}
     </select>
@@ -28,8 +28,8 @@
 
     <select id="detail" resultType="BoardVO">
         select
-            b.*, m.user_id bwriter
-        from tb_board b inner join tb_member m on b.member_id = m.member_id
+            b.*, m.member_name bwriter
+        from tb_board b inner join tb_member2 m on b.member_id = m.member_id
         where bno = #{bno}
     </select>
 
